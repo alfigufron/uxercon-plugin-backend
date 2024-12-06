@@ -1,15 +1,18 @@
 import { Request, Response, Router } from "express";
 
 import IconCategoryController from "./controllers/iconCategory.controller";
+import IconController from "./controllers/icon.controller";
 
 export default class AppRouter {
   public router: Router;
 
-  private controller: IconCategoryController;
+  private iconController: IconController;
+  private iconCategoryController: IconCategoryController;
 
   constructor() {
     this.router = Router();
-    this.controller = new IconCategoryController();
+    this.iconCategoryController = new IconCategoryController();
+    this.iconController = new IconController();
 
     this.initialize();
   }
@@ -19,6 +22,7 @@ export default class AppRouter {
       res.send("Service OK!")
     );
 
-    this.router.get("/v1/category", this.controller.list);
+    this.router.get("/v1/category", this.iconCategoryController.list);
+    this.router.post("/v1/icon/import", this.iconController.import);
   }
 }

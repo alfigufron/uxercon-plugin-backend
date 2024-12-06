@@ -1,5 +1,6 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany } from "typeorm";
 import BaseEntity from "./Base.entity";
+import IconEntity from "./Icon.entity";
 
 @Entity("icon_variants")
 export default class IconVariantEntity extends BaseEntity {
@@ -9,4 +10,7 @@ export default class IconVariantEntity extends BaseEntity {
     unique: true,
   })
   name: string;
+
+  @OneToMany(() => IconEntity, icon => icon.variant)
+  icons: IconEntity[];
 }
