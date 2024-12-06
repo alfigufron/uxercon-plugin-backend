@@ -1,4 +1,4 @@
-import { DEFAULT_TABLE_COLUMNS } from "@constant/database.constant";
+import { DEFAULT_TABLE_COLUMNS } from "src/global/constant/database.constant";
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class IconVariant1733030128054 implements MigrationInterface {
