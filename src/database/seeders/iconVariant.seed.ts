@@ -1,6 +1,6 @@
+import IconVariantRepository from "@app/repositories/iconVariant.repository";
 import Database from "@config/database";
 import IconVariantEntity from "@entities/IconVariant.entity";
-import IconVariantRepository from "@repository/iconVariant.repository";
 import LoggerManager from "@utilities/logger";
 import { DataSource } from "typeorm";
 import { Logger } from "winston";

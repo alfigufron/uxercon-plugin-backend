@@ -17,36 +17,12 @@ export default class IconCategoryRepository extends Repository<IconCategoryEntit
   }
 
   async findAndPaginate(limit: number, page: number) {
-    const [result, total] = await this.findAndCount({
+    const [results, total] = await this.findAndCount({
       order: { created_at: "DESC" },
       take: limit,
       skip: PaginationUtils.calculateOffset(limit, page),
     });
 
-    return { result, total };
+    return { results, total };
   }
 }
-
-// [
-//   {
-//     id: "1",
-//     created_at: "2024-12-01T09:37:14.000Z",
-//     updated_at: "2024-12-01T09:37:14.000Z",
-//     name: "Accessibility",
-//     version: 1,
-//   },
-//   {
-//     id: "2",
-//     created_at: "2024-12-01T09:37:14.000Z",
-//     updated_at: "2024-12-01T09:37:14.000Z",
-//     name: "Alerts & Feedback",
-//     version: 1,
-//   },
-//   {
-//     id: "3",
-//     created_at: "2024-12-01T09:37:14.000Z",
-//     updated_at: "2024-12-01T09:37:14.000Z",
-//     name: "Arrows",
-//     version: 1,
-//   },
-// ];

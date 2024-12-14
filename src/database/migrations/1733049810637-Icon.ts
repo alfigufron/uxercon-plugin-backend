@@ -1,3 +1,4 @@
+import { DEFAULT_TABLE_COLUMNS } from "@global/constant/database.constant";
 import {
   MigrationInterface,
   QueryRunner,
@@ -37,6 +38,7 @@ export class Icon1733049810637 implements MigrationInterface {
         type: "bigint",
         unsigned: true,
       },
+      ...DEFAULT_TABLE_COLUMNS,
     ],
   });
 

@@ -16,13 +16,42 @@ export default class IconRepository extends Repository<IconEntity> {
     this.entityManager = manager;
   }
 
-  async findAndPaginate(limit: number, page: number) {
-    const [result, total] = await this.findAndCount({
-      order: { created_at: "DESC" },
-      take: limit,
-      skip: PaginationUtils.calculateOffset(limit, page),
-    });
+  async findAndPaginate(
+    limit: number,
+    page: number,
+    where?: Partial<{ variant: string; category: string }>
+  ) {
+    // const [result, total] = await this.findAndCount({
+    //   order: { created_at: "DESC" },
+    //   take: limit,
+    //   skip: PaginationUtils.calculateOffset(limit, page),
+    //   relations: ["variant"],
+    //   where: {
+    //     variant: {
+    //       name: where.variant,
+    //     },
+    //   },
+    // });
 
-    return { result, total };
+    const queryBuilder = this.createQueryBuilder("entity")
+      .leftJoinAndSelect("entity.variant", "variant")
+      .leftJoinAndSelect("entity.category", "category")
+      .orderBy("entity.created_at", "DESC")
+      .take(limit)
+      .skip(PaginationUtils.calculateOffset(limit, page));
+
+    if (where.variant)
+      queryBuilder.andWhere("variant.name = :variantName", {
+        variantName: where.variant,
+      });
+
+    if (where.category)
+      queryBuilder.andWhere("category.name = :categoryName", {
+        categoryName: where.category,
+      });
+
+    const [results, total] = await queryBuilder.getManyAndCount();
+
+    return { results, total };
   }
 }

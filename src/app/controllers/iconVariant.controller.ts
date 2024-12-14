@@ -1,4 +1,4 @@
-import IconCategoryRepository from "@app/repositories/iconCategory.repository";
+import IconVariantRepository from "@app/repositories/iconVariant.repository";
 import { ErrorHandler, HttpResponse } from "@config/http";
 import {
   TPaginationQuery,
@@ -8,11 +8,11 @@ import { ValidationMiddleware } from "@global/middleware/validation.middleware";
 import PaginationUtils from "@utilities/pagination";
 import { NextFunction, Request, Response } from "express";
 
-export default class IconCategoryController {
-  private repo: IconCategoryRepository;
+export default class IconVariantController {
+  private repo: IconVariantRepository;
 
   constructor() {
-    this.repo = new IconCategoryRepository();
+    this.repo = new IconVariantRepository();
   }
 
   list = async (req: Request, res: Response, next: NextFunction) => {
@@ -27,7 +27,9 @@ export default class IconCategoryController {
       if (all === "true") {
         const [result, total] = await this.repo.findAndCount();
         data = { result, total };
-      } else data = await this.repo.findAndPaginate(limit, page);
+      } else {
+        data = await this.repo.findAndPaginate(limit, page);
+      }
 
       const paginateData = PaginationUtils.pagination(
         data,

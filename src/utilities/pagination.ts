@@ -1,6 +1,6 @@
 type PaginationData<T> = {
   total: number;
-  result: T[];
+  results: T[];
 };
 
 type PaginationResult<T> = {
@@ -35,7 +35,7 @@ export default class PaginationUtils {
   ): PaginationResult<T> {
     const total_page = Math.ceil(data.total / limit);
     const total_records = data.total;
-    const records = data.result;
+    const records = data.results;
 
     return {
       current_page,

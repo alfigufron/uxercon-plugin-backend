@@ -1,6 +1,6 @@
+import IconCategoryRepository from "@app/repositories/iconCategory.repository";
 import Database from "@config/database";
 import IconCategoryEntity from "@entities/IconCategory.entity";
-import IconCategoryRepository from "@repository/iconCategory.repository";
 import LoggerManager from "@utilities/logger";
 import { DataSource } from "typeorm";
 import { Logger } from "winston";

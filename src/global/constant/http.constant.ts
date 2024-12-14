@@ -14,11 +14,11 @@ export enum HTTPMessage {
   ServerError = "Internal Server Error",
 }
 
-export type TPaginationQuery = {
-  page?: number;
-  limit?: number;
-  all?: string;
-};
+export type TPaginationQuery = Partial<{
+  page: number;
+  limit: number;
+  all: string;
+}>;
 
 export const paginationQuerySchema = Joi.object({
   page: Joi.number().min(1).default(1),

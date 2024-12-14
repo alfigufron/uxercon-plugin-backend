@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
 import BaseEntity from "./Base.entity";
 import IconCategoryEntity from "./IconCategory.entity";
 import IconVariantEntity from "./IconVariant.entity";
@@ -16,9 +16,11 @@ export default class IconEntity extends BaseEntity {
   })
   svg: string;
 
-  @ManyToOne(() => IconVariantEntity, variant => variant.icons)
-  variant: IconVariantEntity[];
+  @ManyToOne(() => IconVariantEntity, variant => variant)
+  @JoinColumn({ name: "icon_variant_id" })
+  variant: IconVariantEntity;
 
-  @ManyToOne(() => IconCategoryEntity, category => category.icons)
-  category: IconCategoryEntity[];
+  @ManyToOne(() => IconCategoryEntity, category => category)
+  @JoinColumn({ name: "icon_category_id" })
+  category: IconCategoryEntity;
 }
