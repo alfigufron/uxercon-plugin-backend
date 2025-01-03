@@ -25,8 +25,8 @@ export default class IconCategoryController {
 
       let data;
       if (all === "true") {
-        const [result, total] = await this.repo.findAndCount();
-        data = { result, total };
+        const [results, total] = await this.repo.findAndCount();
+        data = { results, total };
       } else data = await this.repo.findAndPaginate(limit, page);
 
       const paginateData = PaginationUtils.pagination(

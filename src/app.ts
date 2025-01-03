@@ -1,6 +1,7 @@
 import express, { Application } from "express";
 import { Logger } from "winston";
 import helmet from "helmet";
+import cors from "cors";
 
 import LoggerManager from "@utilities/logger";
 import AppRouter from "@app/routes";
@@ -42,6 +43,11 @@ class Server {
 
   private initMiddleware() {
     this.app.use(helmet());
+    this.app.use(
+      cors({
+        origin: "*",
+      })
+    );
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
   }

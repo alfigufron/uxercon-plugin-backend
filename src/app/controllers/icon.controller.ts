@@ -9,11 +9,11 @@ import { ValidationMiddleware } from "@global/middleware/validation.middleware";
 import PaginationUtils from "@utilities/pagination";
 import { NextFunction, Request, Response } from "express";
 import Joi from "joi";
-import { Like } from "typeorm";
 
 type TListQuery = Partial<{
   variant: string;
   category: string;
+  q: string;
 }> &
   TPaginationQuery;
 
@@ -28,7 +28,6 @@ export default class IconController {
 
   list = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log("Decalre Schema");
       const validationSchema = Joi.object()
         .concat(paginationQuerySchema)
         .concat(
@@ -42,13 +41,23 @@ export default class IconController {
           Joi.object({
             category: Joi.string().optional(),
           })
+        )
+        .concat(
+          Joi.object({
+            q: Joi.string().optional(),
+          })
         );
 
-      let { limit, page, variant, category } =
-        ValidationMiddleware.validateQuery<TListQuery>(
-          req.query,
-          validationSchema
-        );
+      let {
+        limit,
+        page,
+        variant,
+        category,
+        q: search,
+      } = ValidationMiddleware.validateQuery<TListQuery>(
+        req.query,
+        validationSchema
+      );
 
       if (variant) variant = variant.charAt(0).toUpperCase() + variant.slice(1);
 
@@ -66,6 +75,7 @@ export default class IconController {
       const data = await this.repo.findAndPaginate(limit, page, {
         variant,
         category,
+        name: search,
       });
 
       const paginateData = PaginationUtils.pagination(data, page, limit);

@@ -16,6 +16,11 @@ export default class IconEntity extends BaseEntity {
   })
   svg: string;
 
+  @Column({
+    type: "int",
+  })
+  pro: number;
+
   @ManyToOne(() => IconVariantEntity, variant => variant)
   @JoinColumn({ name: "icon_variant_id" })
   variant: IconVariantEntity;

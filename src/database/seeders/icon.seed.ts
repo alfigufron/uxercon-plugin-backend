@@ -81,6 +81,7 @@ export default class IconSeeder {
                   ...icon,
                   category: category[y],
                   variant: variant[x],
+                  pro: Math.random() >= 0.5 ? 1 : 0,
                 });
               }
             }

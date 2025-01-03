@@ -29,6 +29,10 @@ export class Icon1733049810637 implements MigrationInterface {
         type: "longtext",
       },
       {
+        name: "pro",
+        type: "int",
+      },
+      {
         name: "icon_variant_id",
         type: "bigint",
         unsigned: true,

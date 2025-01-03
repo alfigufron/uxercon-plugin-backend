@@ -19,26 +19,19 @@ export default class IconRepository extends Repository<IconEntity> {
   async findAndPaginate(
     limit: number,
     page: number,
-    where?: Partial<{ variant: string; category: string }>
+    where?: Partial<{ name: string; variant: string; category: string }>
   ) {
-    // const [result, total] = await this.findAndCount({
-    //   order: { created_at: "DESC" },
-    //   take: limit,
-    //   skip: PaginationUtils.calculateOffset(limit, page),
-    //   relations: ["variant"],
-    //   where: {
-    //     variant: {
-    //       name: where.variant,
-    //     },
-    //   },
-    // });
-
     const queryBuilder = this.createQueryBuilder("entity")
       .leftJoinAndSelect("entity.variant", "variant")
       .leftJoinAndSelect("entity.category", "category")
       .orderBy("entity.created_at", "DESC")
       .take(limit)
       .skip(PaginationUtils.calculateOffset(limit, page));
+
+    if (where.name)
+      queryBuilder.andWhere("entity.name LIKE :query", {
+        query: `%${where.name}%`,
+      });
 
     if (where.variant)
       queryBuilder.andWhere("variant.name = :variantName", {
