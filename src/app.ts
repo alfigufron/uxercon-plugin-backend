@@ -9,6 +9,7 @@ import AppRouter from "@app/routes";
 import "reflect-metadata";
 import Database from "@config/database";
 import { HTTPMiddleware } from "@global/middleware/http.middleware";
+import env from "@config/env";
 
 class Server {
   private app: Application;
@@ -19,7 +20,7 @@ class Server {
 
   constructor() {
     this.app = express();
-    this.port = 5050;
+    this.port = env.SERVER_PORT || 5050;
     this.appRouter = new AppRouter();
     this.httpMiddleware = new HTTPMiddleware();
 
