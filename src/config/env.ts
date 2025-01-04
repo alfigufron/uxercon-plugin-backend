@@ -19,6 +19,9 @@ const env = {
     },
   },
   LOG_FILE: process.env.LOG_FILE,
+  LEMONSQUEEZY: {
+    API_KEY: process.env.LS_API_KEY,
+  },
 };
 
 export default env;

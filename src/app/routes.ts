@@ -3,6 +3,7 @@ import { Request, Response, Router } from "express";
 import IconCategoryController from "./controllers/iconCategory.controller";
 import IconController from "./controllers/icon.controller";
 import IconVariantController from "./controllers/iconVariant.controller";
+import AuthController from "./controllers/auth.controller";
 
 export default class AppRouter {
   public router: Router;
@@ -11,11 +12,16 @@ export default class AppRouter {
   private iconCategoryController: IconCategoryController;
   private iconVariantController: IconVariantController;
 
+  private authController: AuthController;
+
   constructor() {
     this.router = Router();
+
     this.iconController = new IconController();
     this.iconCategoryController = new IconCategoryController();
     this.iconVariantController = new IconVariantController();
+
+    this.authController = new AuthController();
 
     this.initialize();
   }
@@ -30,5 +36,7 @@ export default class AppRouter {
 
     this.router.get("/v1/icon", this.iconController.list);
     this.router.post("/v1/icon/import", this.iconController.import);
+
+    this.router.post("/v1/auth/login", this.authController.login);
   }
 }
