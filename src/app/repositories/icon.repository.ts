@@ -24,7 +24,7 @@ export default class IconRepository extends Repository<IconEntity> {
     const queryBuilder = this.createQueryBuilder("entity")
       .leftJoinAndSelect("entity.variant", "variant")
       .leftJoinAndSelect("entity.category", "category")
-      .orderBy("entity.created_at", "DESC")
+      .orderBy("entity.name", "ASC")
       .take(limit)
       .skip(PaginationUtils.calculateOffset(limit, page));
 

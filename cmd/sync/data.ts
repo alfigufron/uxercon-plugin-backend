@@ -28,7 +28,7 @@ export const proCategories = [
   { name: "Festivity", version: 3 },
   { name: "File & Folder", version: 1 },
   { name: "Film & Video", version: 2 },
-  { name: "Film & Video", version: 3 },
+  { name: "Filter & Sort", version: 3 },
   { name: "Finance & Payment", version: 1 },
   { name: "Food & Beverage", version: 3 },
   { name: "Gaming", version: 3 },
@@ -61,4 +61,29 @@ export const proCategories = [
   { name: "Users & People", version: 1 },
   { name: "Weather", version: 2 },
   { name: "Web3 & Blockchain", version: 2 },
+];
+
+export const freebiesVariants = ["Line", "Duocolor", "Gestalt"];
+
+export const freebiesCategories = [
+  { name: "Arrows", version: 1 },
+  { name: "Alphabet", version: 2 },
+  { name: "Charts & Graphs", version: 1 },
+  { name: "Communication", version: 1 },
+  { name: "Cryptocurrency", version: 3 },
+  { name: "Date & Time", version: 1 },
+  { name: "Emojis", version: 2 },
+  { name: "File & Folder", version: 1 },
+  { name: "Filter & Sort", version: 3 },
+  { name: "Images & Photos", version: 1 },
+  { name: "Investment & Stock", version: 3 },
+  { name: "Legal & Policy", version: 3 },
+  { name: "Map & Navigation", version: 1 },
+  { name: "Mathematics", version: 2 },
+  { name: "Numbers", version: 2 },
+  { name: "Shapes", version: 2 },
+  { name: "Social Media & Branding", version: 2 },
+  { name: "User Interface", version: 1 },
+  { name: "Users & People", version: 1 },
+  { name: "Weather", version: 2 },
 ];

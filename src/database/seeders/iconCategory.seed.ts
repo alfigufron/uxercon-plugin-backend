@@ -38,7 +38,7 @@ export default class IconCategorySeeder {
     { name: "Festivity", version: 3 },
     { name: "File & Folder", version: 1 },
     { name: "Film & Video", version: 2 },
-    { name: "Film & Video", version: 3 },
+    { name: "Filter & Sort", version: 3 },
     { name: "Finance & Payment", version: 1 },
     { name: "Food & Beverage", version: 3 },
     { name: "Gaming", version: 3 },
