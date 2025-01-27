@@ -9,7 +9,10 @@ import AppRouter from "@app/routes";
 import "reflect-metadata";
 import Database from "@config/database";
 import { HTTPMiddleware } from "@global/middleware/http.middleware";
+import rateLimiterMiddleware from "@global/middleware/ratelimiter.middleware";
 import env from "@config/env";
+import { ErrorHandler } from "@config/http";
+import { RateLimitRequestHandler } from "express-rate-limit";
 
 class Server {
   private app: Application;
@@ -17,12 +20,14 @@ class Server {
   private appLogger: Logger = LoggerManager.getInstance().get("app");
   private appRouter: AppRouter;
   private httpMiddleware: HTTPMiddleware;
+  private limiterMiddleware: RateLimitRequestHandler;
 
   constructor() {
     this.app = express();
     this.port = env.SERVER_PORT || 5050;
     this.appRouter = new AppRouter();
     this.httpMiddleware = new HTTPMiddleware();
+    this.limiterMiddleware = rateLimiterMiddleware;
 
     try {
       this.initMiddleware();
@@ -51,6 +56,7 @@ class Server {
     );
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(this.limiterMiddleware);
   }
 
   private initRoutes(): void {
